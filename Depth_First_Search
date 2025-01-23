@@ -145,3 +145,18 @@ Visited node: 3
 Visited node: 1
 
 This approach is iterative and avoids potential stack overflow issues that may occur with a recursive implementation for large graphs.
+
+
+Time Complexity:
+The time complexity of the DFS algorithm is O(V + E), where:
+
+V: Number of vertices (nodes) in the graph.
+E: Number of edges in the graph.
+Explanation:
+
+Vertices: Each vertex is pushed and popped from the stack exactly once, and each vertex is checked for whether it has been visited, which takes 
+O(V) in total.
+Edges: The algorithm iterates through all the neighbors of each vertex. Since the graph is represented as an adjacency list, the sum of all neighbors processed is 
+O(E).
+Thus, the total time complexity is
+O(V+E).
