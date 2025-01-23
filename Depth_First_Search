@@ -59,3 +59,89 @@ Output: 0 2 4 1 3
 Time Complexity: For an undirected graph, O(N) + O(2E), For a directed graph, O(N) + O(E), Because for every node we are calling the recursive function once, the time taken is O(N) and 2E is for total degrees as we traverse for all adjacent nodes.
 
 Space Complexity: O(3N) ~ O(N), Space for dfs stack space, visited array and an adjacency list.
+
+=========================================================================================================================================
+
+DFS implementation using stacks-
+
+#include <iostream>
+#include <vector>
+#include <stack>
+
+using namespace std;
+
+// Function to perform DFS using a stack
+void dfs(int startNode, const vector<vector<int>>& graph) {
+    vector<bool> visited(graph.size(), false); // Track visited nodes
+    stack<int> s;                             // Stack for DFS
+
+    s.push(startNode); // Start from the given node
+
+    while (!s.empty()) {
+        int currentNode = s.top();
+        s.pop();
+
+        // If the current node is not visited, process it
+        if (!visited[currentNode]) {
+            visited[currentNode] = true;
+            cout << "Visited node: " << currentNode << endl;
+
+            // Push all unvisited neighbors onto the stack
+            for (int neighbor : graph[currentNode]) {
+                if (!visited[neighbor]) {
+                    s.push(neighbor);
+                }
+            }
+        }
+    }
+}
+
+int main() {
+    // Example graph represented as an adjacency list
+    vector<vector<int>> graph = {
+        {1, 2},    // Neighbors of node 0
+        {0, 3, 4}, // Neighbors of node 1
+        {0, 4},    // Neighbors of node 2
+        {1, 5},    // Neighbors of node 3
+        {1, 2, 5}, // Neighbors of node 4
+        {3, 4}     // Neighbors of node 5
+    };
+
+    int startNode = 0; // Starting node for DFS
+    cout << "DFS traversal starting from node " << startNode << ":\n";
+    dfs(startNode, graph);
+
+    return 0;
+}
+
+
+Explanation:
+Graph Representation: The graph is represented as an adjacency list, where each index in the vector corresponds to a node, and the inner vectors list its neighbors.
+Visited Array: Tracks whether a node has been visited to avoid processing it multiple times.
+Stack: Used to explore the nodes. Neighbors are pushed onto the stack, and nodes are processed in a LIFO order.
+DFS Logic:
+Start by pushing the starting node onto the stack.
+While the stack isn't empty, pop the top node, mark it as visited, and push all its unvisited neighbors onto the stack.
+Output: The program prints the nodes as they are visited.
+
+
+I/p graph-
+
+0: 1, 2
+1: 0, 3, 4
+2: 0, 4
+3: 1, 5
+4: 1, 2, 5
+5: 3, 4
+
+O/p-
+
+DFS traversal starting from node 0:
+Visited node: 0
+Visited node: 2
+Visited node: 4
+Visited node: 5
+Visited node: 3
+Visited node: 1
+
+This approach is iterative and avoids potential stack overflow issues that may occur with a recursive implementation for large graphs.
