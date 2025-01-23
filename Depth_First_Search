@@ -160,3 +160,16 @@ Edges: The algorithm iterates through all the neighbors of each vertex. Since th
 O(E).
 Thus, the total time complexity is
 O(V+E).
+
+Space Complexity:
+The space complexity of the DFS algorithm is O(V).
+
+Explanation:
+
+Visited Array: A boolean array of size 
+V is used to track whether each vertex has been visited, which takes 
+O(V) space.
+Stack: The stack used for the iterative DFS can hold at most 
+O(V) elements (in the worst case, all nodes could be on the stack at once if the graph is a long chain).
+Thus, the total space complexity is 
+O(V).
