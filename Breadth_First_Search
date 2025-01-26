@@ -65,3 +65,78 @@ Output: 0 1 4 2 3
 Time Complexity: O(N) + O(2E), Where N = Nodes, 2E is for total degrees as we traverse all adjacent nodes.
 
 Space Complexity: O(3N) ~ O(N), Space for queue data structure visited array and an adjacency list
+
+
+=============================================================================================================================
+
+Breadth-First Search (BFS) is typically implemented using a queue, as it explores level by level. BFS is not inherently recursive like Depth-First Search (DFS).
+However, you can simulate BFS recursion using a helper function that processes nodes level by level. Below is an example of a recursive implementation of BFS in C++:
+
+#include <iostream>
+#include <queue>
+#include <vector>
+using namespace std;
+
+// Function to perform BFS recursively
+void bfsRecursive(queue<int>& q, vector<bool>& visited, vector<vector<int>>& graph) {
+    if (q.empty()) return;
+
+    int node = q.front();
+    q.pop();
+
+    // Process the current node
+    cout << node << " ";
+
+    // Visit all neighbors
+    for (int neighbor : graph[node]) {
+        if (!visited[neighbor]) {
+            visited[neighbor] = true;
+            q.push(neighbor);
+        }
+    }
+
+    // Recursive call for the next level
+    bfsRecursive(q, visited, graph);
+}
+
+int main() {
+    int n = 5; // Number of nodes
+    vector<vector<int>> graph(n);
+
+    // Add edges (undirected graph example)
+    graph[0] = {1, 2};
+    graph[1] = {0, 3, 4};
+    graph[2] = {0};
+    graph[3] = {1};
+    graph[4] = {1};
+
+    vector<bool> visited(n, false);
+    queue<int> q;
+
+    // Start BFS from node 0
+    int startNode = 0;
+    visited[startNode] = true;
+    q.push(startNode);
+
+    cout << "BFS Traversal: ";
+    bfsRecursive(q, visited, graph);
+
+    return 0;
+}
+
+
+Explanation:
+Graph Representation: The graph is represented as an adjacency list using a vector<vector<int>>.
+Visited Array: Keeps track of visited nodes to avoid reprocessing.
+Queue: A queue is used to manage the nodes being processed in a BFS manner.
+Recursive Function:
+Processes the current node.
+Adds unvisited neighbors to the queue.
+Calls itself recursively with the updated queue.
+Base Case: The recursion stops when the queue is empty.
+Output (for the example graph):
+
+BFS Traversal: 0 1 2 3 4 
+
+This approach demonstrates BFS using recursion by delegating the queue management to recursive calls.
+However, keep in mind that this method is less efficient than the iterative version due to the overhead of recursive calls and stack usage.
