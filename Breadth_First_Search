@@ -1,4 +1,5 @@
 //https://takeuforward.org/graph/breadth-first-search-bfs-level-order-traversal/
+//BFS- used in those questions where it is asked for level-wise traversal and something minimum.
 
 #include <bits/stdc++.h>
 using namespace std;
